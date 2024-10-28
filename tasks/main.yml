@@ -1,0 +1,11 @@
+- name: Grab the latest version of Portainer
+  get_url:
+    url: "https://downloads.portainer.io/{{ portainer_edition }}{{ portainer_version | replace('.', '-') }}/portainer-agent-stack.yml"
+    dest: /tmp/portainer-agent-stack.yml
+
+- name: Deploy the Portainer stack
+  docker_stack:
+    state: "{{ docker_stack_portainer_state }}"
+    name: portainer
+    compose_files: /tmp/portainer-agent-stack.yml
+    purge: yes
