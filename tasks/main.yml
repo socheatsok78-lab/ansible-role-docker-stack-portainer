@@ -1,6 +1,6 @@
 ---
-- include_tasks: docker-stack-present.yml
+- include_tasks: setup-present.yml
   when: portainer_stack_state == 'present'
 
-- include_tasks: docker-stack-absent.yml
+- include_tasks: setup-absent.yml
   when: portainer_stack_state == 'absent'
