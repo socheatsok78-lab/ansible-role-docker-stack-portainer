@@ -1,4 +1,6 @@
 # Ansible Role Options
 portainer_edition: ce
 portainer_version: 2.21
-docker_stack_portainer_state: present # or absent (default: present)
+
+portainer_stack_state: present # or absent (default: present)
+portainer_stack_name: portainer

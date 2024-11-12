@@ -1,0 +1,28 @@
+- name: Create temporary directory
+  register: portainerdir
+  ansible.builtin.tempfile:
+    state: directory
+    suffix: portainer
+
+- name: Download Portainer {{ portainer_edition }} v{{ portainer_version }} stack file
+  get_url:
+    url: "https://downloads.portainer.io/{{ portainer_edition }}{{ portainer_version | replace('.', '-') }}/portainer-agent-stack.yml"
+    dest: "{{ portainerdir.path }}/portainer-agent-stack.yml"
+  when: portainerdir.path is defined
+
+- name: Deploy Portainer stack
+  docker_stack:
+    name: "{{ portainer_stack_name }}"
+    state: present
+    purge: yes
+    resolve_image: always
+    with_registry_auth: true
+    compose:
+      - "{{ portainerdir.path }}/portainer-agent-stack.yml"
+  when: portainerdir.path is defined
+
+- name: Remove temporary directory
+  ansible.builtin.file:
+    path: "{{ portainerdir.path }}"
+    state: absent
+  when: portainerdir.path is defined

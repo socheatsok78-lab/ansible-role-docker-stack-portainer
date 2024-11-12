@@ -1,0 +1,5 @@
+---
+- name: Remove the Portainer stack
+  docker_stack:
+    name: "{{ portainer_stack_name }}"
+    state: absent
