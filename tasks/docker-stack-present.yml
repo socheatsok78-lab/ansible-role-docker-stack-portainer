@@ -1,8 +1,8 @@
 - name: Create temporary directory
-  register: portainerdir
   ansible.builtin.tempfile:
     state: directory
     suffix: portainer
+  register: portainerdir
 
 - name: Download Portainer {{ portainer_edition }} v{{ portainer_version }} stack file
   get_url:
