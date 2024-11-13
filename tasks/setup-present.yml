@@ -14,7 +14,6 @@
   docker_stack:
     name: "{{ portainer_stack_name }}"
     state: present
-    purge: yes
     resolve_image: always
     with_registry_auth: true
     compose:
