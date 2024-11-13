@@ -10,6 +10,12 @@
     dest: "{{ portainerdir.path }}/portainer-agent-stack.yml"
   when: portainerdir.path is defined
 
+- name: Download Portainer stack patch file
+  get_url:
+    url: "https://raw.githubusercontent.com/socheatsok78-lab/ansible-role-docker-stack-portainer/refs/heads/main/hacks/portainer-agent-stack-patch.yml"
+    dest: "{{ portainerdir.path }}/portainer-agent-stack-patch.yml"
+  when: portainerdir.path is defined
+
 - name: Deploy Portainer stack
   docker_stack:
     name: "{{ portainer_stack_name }}"
@@ -18,6 +24,7 @@
     with_registry_auth: true
     compose:
       - "{{ portainerdir.path }}/portainer-agent-stack.yml"
+      - "{{ portainerdir.path }}/portainer-agent-stack-patch.yml"
   when: portainerdir.path is defined
 
 - name: Remove temporary directory
