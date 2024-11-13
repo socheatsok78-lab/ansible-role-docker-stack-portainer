@@ -17,7 +17,7 @@ portainer_stack_state: present # or absent (default: present)
 ```yaml
 roles:
   - name: socheatsok78-lab.docker-stack-portainer
-    src: https://github.com/socheatsok78-lab/ansible-role-docker-stack-portainer
+    src: https://github.com/socheatsok78-lab/ansible-role-docker-stack-portainer.git
     version: main
     scm: git
 ```

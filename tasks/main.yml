@@ -1,4 +1,3 @@
----
 - include_tasks: setup-present.yml
   when: portainer_stack_state == 'present'
 
